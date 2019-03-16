@@ -98,9 +98,8 @@ $sql = "SELECT * FROM history WHERE status = 0 ";
              
                 echo "<form action='driver_confirmed.php' method='post'>";
                 echo "<button type='submit' onclick='window.location.href='./driver_confirmed.php'' class='btn btn-primary'>Confirm</button>";
-              
-               
                 echo "</form>";
+                
                 echo "</td>";
                 echo "</tr>";
 
@@ -117,13 +116,13 @@ $sql = "SELECT * FROM history WHERE status = 0 ";
         }
     }
 }
-
 ?>
 
-
         </thead>
- 
   </table>
+
+<button type="button" onclick="window.location.href='./driver_history.php'" class="btn btn-outline-dark btn-lg btn-block">History</button>
+
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

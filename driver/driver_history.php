@@ -65,9 +65,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                 <th>Finish Time</th>
                 <th>Fare</th>
             </tr>
-            <?php
+<?php
 
-$sql = "SELECT * FROM history WHERE status = 3 ";
+$sql = "SELECT * FROM history WHERE status = 4";
 
     if($stmt = $pdo->prepare($sql)){
   $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
@@ -108,20 +108,32 @@ $sql = "SELECT * FROM history WHERE status = 3 ";
                 echo $record['fare'];
                 echo "</td>";
 
-                echo "<td>";
-                echo "<form action='driver_confirmed.php' method='post'>";
-                echo "<button type='submit' onclick='window.location.href='./driver_confirmed.php'' class='btn btn-primary'>dispute</button>";
-              
-               
+               echo "<td>";
+                echo "<form action='driver_accept_dispute.php' method='post'>";
+                echo "<button type='submit' onclick='window.location.href='./driver_confirmed.php'' class='btn  btn-warning'>Accept dispute</button>";   
                 echo "</form>";
                 echo "</td>";
+
+
+                echo "<td>";
+                echo "<form action='driver_reject_dispute.php' method='post'>";
+                echo "<button type='submit_reject' onclick='window.location.href='./driver_confirmed.php'' class='btn btn-danger'>Reject dispute</button>";
+                echo "</form>";
+                echo "</td>";
+
                 echo "</tr>";
+
+             
 
                 if (isset($_POST['submit'])){
                 header("Location: 
-                  driver_confirmed.php");
+                  driver_accept_dispute.php");
                 }
 
+                 if (isset($_POST['submit_reject'])){
+                header("Location: 
+                  driver_reject_dispute.php");
+                }
 
                 
             }
@@ -133,6 +145,97 @@ $sql = "SELECT * FROM history WHERE status = 3 ";
 
 ?>
 
+<?php
+
+$sql = "SELECT * FROM history WHERE status = '3' OR  status = '5' OR status = '6'";
+
+    if($stmt = $pdo->prepare($sql)){
+  $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
+    $param_username = $_SESSION["username"];
+
+
+    if($stmt->execute())
+    {
+        if($stmt->rowCount() >= 1)
+        {
+            $count = 0;
+            $records = $stmt->fetchAll();
+       
+            foreach ($records as $record) {
+                
+                $_SESSION['passengerName'] = $record['passengerName'];
+                $_SESSION['startTime'] = $record['startTime'];
+                echo "<tr>";
+
+                echo "<td>";
+                echo $record['passengerName'];
+                echo "</td>";
+
+                  echo "<td>";
+                echo $record['driverName'];
+                echo "</td>";
+
+                echo "<td>";
+                echo $record['startTime']; 
+                echo "</td>";
+
+
+                echo "<td>";
+                echo $record['finishTime'];
+                echo "</td>";
+
+                echo "<td>";
+                echo $record['fare'];
+                echo "</td>";
+
+        
+                      if ($record['status'] == '3'){
+          $completed = "completed";
+           echo "<td>";
+            echo $completed;
+                echo "</td>";
+
+       }
+
+                   if ($record['status'] == '5'){
+          $Accept = "Accept Dispute";
+           echo "<td>";
+            echo $Accept;
+                echo "</td>";
+
+       }
+           if ($record['status'] == '6'){
+          $Reject = "Reject Dispute";
+           echo "<td>";
+            echo $Reject;
+                echo "</td>";
+
+       }
+
+
+                echo "</tr>";
+
+             
+
+                if (isset($_POST['submit'])){
+                header("Location: 
+                  driver_accept_dispute.php");
+                }
+
+                 if (isset($_POST['submit_reject'])){
+                header("Location: 
+                  driver_reject_dispute.php");
+                }
+
+                
+            }
+        
+                
+        }
+    }
+}
+
+?>
 
         </thead>
  
