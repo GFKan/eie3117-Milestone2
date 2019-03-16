@@ -17,7 +17,7 @@
   <!--Nav Bar -->
   <nav class="navbar navbar-dark bg-dark sticky-top" >
       <div class="navbar-brand" >
-        <a href="welcome.php" class="btn_home">
+        <a href="home.php" class="btn_home">
           <img src="photo/polyu.png" width="30" height="30" class="d-inline-block align-top" alt="">
           EIE3117 - Integrated Project
         </a>
@@ -34,11 +34,15 @@
     	</div>
     	<ul class="nav justify-content-end">
       	<li class="nav-item">
+      		<button onclick="window.location.href='./wallet/save-wallet.php'"type="button" class="btn btn-info">Wallet</button>
+
+
        	 <a href="logout.php" class="btn btn-danger">Sign Out</a>
       	</li>
     	</ul>
   </nav>
   <!-- Nav Bar-->
-
+<button type="button" onclick="window.location.href='./passenger/passenger_home.php'" class="btn btn-primary btn-lg btn-block">Passenger</button>
+<button type="button" onclick="window.location.href='./driver/driver_home.php'" class="btn btn-secondary btn-lg btn-block">Driver</button>
 </body>
 </html>
